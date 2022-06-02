@@ -9,34 +9,75 @@
 	crossorigin="anonymous">
 </head>
 <body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Service Management System</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/emp}">Employee Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Others</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
 	<div class="container">
-		<h1>Employee Management System</h1>
 		<hr>
-		<h2>Save Employee</h2>
+		<h2>New Employee</h2>
 
 		<form action="#" th:action="@{/saveEmployee}" th:object="${employee}"
 			method="POST">
             <label>
                 <input type="text" th:field="*{firstName}"
-                    placeholder="Employee First Name" class="form-control mb-4 col-4">
+                    placeholder="Employee First Name" class="form-control">
             </label>
-
+            <br>
             <label>
                 <input type="text" th:field="*{lastName}"
-                placeholder="Employee Last Name" class="form-control mb-4 col-4">
+                placeholder="Employee Last Name" class="form-control">
             </label>
-
+            <br>
             <label>
                 <input type="text" th:field="*{email}"
-                placeholder="Employee Email" class="form-control mb-4 col-4">
+                placeholder="Employee Email" class="form-control">
             </label>
-
-            <button type="submit" class="btn btn-info col-2"> Save Employee</button>
+            <br>
+            <label>
+                <input type="date" th:field="*{dob}"
+                       placeholder="Employee date of birth" class="form-control" >
+            </label>
+            <br>
+            <label class="form-control mb-4 col-4">
+                <!--<input type="radio" th:field="*{gender}">Gender-->
+                <input type="radio" id="male" name="gender" value="Male">
+                    <label for="male">Male</label><br>
+            </label>
+            <label class="form-control mb-4 col-4">
+                <input type="radio" id="female" name="gender" value="Female">
+                    <label for="female">Female</label><br>
+            </label>
+            <br>
+            <label>
+                <input type="text" th:field="*{dept_id}"
+                       placeholder="Employee Dept ID" class="form-control">
+            </label>
+            <br>
+            <button type="submit" class="btn btn-info col-2"> Register Employee</button>
 		</form>
 		
 		<hr>
 		
-		<a th:href = "@{/}"> Back to Employee List</a>
+		<a th:href = "@{/}"> Cancel</a>
 	</div>
 </body>
 </html>

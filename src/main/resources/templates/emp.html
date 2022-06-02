@@ -12,10 +12,31 @@
 </head>
 <body>
 
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Service Management System</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/emp}">Employee Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Others</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
 	<div class="container my-2">
 	<h1>Employee List</h1>
-	
-	<a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add Service </a>
+
 	
 		<table border="1" class = "table table-striped table-responsive-md">
 			<thead>
@@ -32,6 +53,18 @@
 					<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
 							Employee Email</a>
 					</th>
+                    <th>
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+                            Employee DoB</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+                            Employee Gender</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+                            Employee Dept_ID</a>
+                    </th>
 					<th> Actions </th>
 				</tr>
 			</thead>
@@ -40,12 +73,17 @@
 					<td th:text="${employee.firstName}"></td>
 					<td th:text="${employee.lastName}"></td>
 					<td th:text="${employee.email}"></td>
+                    <td th:text="${employee.dob}"></td>
+                    <td th:text="${employee.gender}"></td>
+                    <td th:text="${employee.dept_id}"></td>
 					<td> <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
 					    <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
+
+        <a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add Employee </a>
 		
 		<div th:if = "${totalPages > 1}">
 			<div class = "row col-sm-10">
