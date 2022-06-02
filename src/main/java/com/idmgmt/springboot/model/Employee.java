@@ -33,7 +33,7 @@ public class Employee {
     private String gender;
 
     @Column(name = "department_id")
-    private String dept_id;
+    private String deptID;
 
 	/*public long getId() {
 		return id;

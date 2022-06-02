@@ -11,21 +11,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/emp")
 public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
 	
 	// display list of employees
-	@GetMapping("/")
+	@GetMapping("")
 	public String viewHomePage(Model model) {
 		return findPaginated(1, "firstName", "asc", model);		
 	}
-
-    @GetMapping("/emp")
-    public String viewHomePage2(Model model) {
-        return findPaginated(1, "firstName", "asc", model);
-    }
 
 	@GetMapping("/showNewEmployeeForm")
 	public String showNewEmployeeForm(Model model) {
@@ -39,7 +35,7 @@ public class EmployeeController {
 	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
 		// save employee to database
 		employeeService.saveEmployee(employee);
-		return "redirect:/";
+		return "redirect:/emp";
 	}
 
 	@GetMapping("/showFormForUpdate/{id}")
@@ -58,7 +54,7 @@ public class EmployeeController {
 
 		// call delete employee method
 		this.employeeService.deleteEmployeeById(id);
-		return "redirect:/";
+		return "redirect:/emp";
 	}
 
 

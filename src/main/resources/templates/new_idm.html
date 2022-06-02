@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--<meta charset="UTF-8">-->
+    <meta charset="ISO-8859-1">
+    <title>Master Config</title><title>Service Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Service Management System</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/emp}">Employee Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/idm}">IDM Management</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-2">
+    <h1>Application Configuration</h1>
+    <form action="#" class="masterConfigForm" method="POST" th:action="@{/idm/saveIDM}" th:object="${idm}">
+        <table>
+            <tr>
+                <td><label for="id">Application ID</label></td>
+                <td>
+                    <input th:field="*{id}" type="text" name="id" id="id" placeholder="ex. GITLAB" required/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="function">Function
+                        <select name="function" required>
+                            <option disabled selected>Choose backend service type</option>
+                            <option id="function" value="WEB_SERVICE">WEB_SERVICE</option>
+                            <option value="API_INTERNAL">API_INTERNAL</option>
+                            <option value="BASE_24">BASE_24</option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="http" >
+                        Set Protocol
+                        <input type = "radio" name = "http" value="HTTPS" id="http" required> HTTPS
+                        <input type = "radio" name = "http" value="HTTP" required> HTTP
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="params">Parameters</label></td>
+                <td>
+                    <input th:field="*{params}" type="text" name="params" id="params" placeholder="ex: gitlab.backoffice.pcf.dti.co.id" required/>
+                </td>
+            </tr>
+
+            <!--<tr>
+                <td>
+                    <label for="endpoint">Endpoint</label>
+                    <input type="number" name="endpoint" id="endpoint" placeholder="ex. 443" required/>
+                </td>
+            </tr>-->
+
+            <tr>
+                <td>
+                    <label for="insDate">Insert date</label>
+                    <input th:field="*{insDate}" type="datetime-local" name="insDate" id="insDate"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="updDate">Update date</label>
+                    <input th:field="*{updDate}" type="date" name="updDate" id="updDate" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="endpoint">Endpoint
+                        <select name="endpoint" required>
+                            <option disabled selected>Choose status</option>
+                            <option id="endpoint" value="Development">Development</option>
+                            <option value="UAT">UAT</option>
+                            <option value="Production">Production</option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="submit" class="btn btn-info col-6" name = "Register" value="Register"/>
+                </td>
+            </tr>
+            <!--<button type="submit">Next</button>-->
+        </table>
+    </form>
+
+
+        <a th:href = "@{/idm}"> Cancel</a>
+<script>
+
+    /////// METHOD 1
+
+    function submitForm(event) {
+        // Prevent the form from submitting.
+        event.preventDefault();
+
+        // Set url for submission and collect data.
+        const url = "http://localhost:9099/save";
+        const formData = new FormData(event.target);
+
+        // Build the data object.
+        const data = {};
+        formData.forEach((value, key) => (data[key] = value));
+
+        // Log the data.
+        console.log(data);
+
+        const json = JSON.stringify(data);
+        console.log("JSON STRINGIFY: " + json);
+
+    }
+
+    const masterConfigForm = document.querySelector(".masterConfigForm");
+    //masterConfigForm.addEventListener("submit", submitForm);
+
+    /////// METHOD 2
+
+    function convert2JSON(formData) {
+        const data = {};
+        formData.forEach((value, key) => (data[key] = value));
+        return JSON.stringify(data);
+    }
+
+    async function handleForm(event) {
+
+        event.preventDefault();
+
+        const masterForm = event.target;
+        const fd = new FormData(masterForm);
+
+        const dataJson = convert2JSON(fd);
+
+        const h = new Headers();
+        h.append('Content-Type','application/json');
+
+        const url = "http://localhost:9099/IDManagement/";
+
+        const request = new Request(url, {
+            method: 'POST',
+            body: dataJson,
+            headers: h,
+        });
+
+        fetch(request)
+            .then((response) => response.json())
+            .then((dataJson) => {
+                console.log("Response: ");
+                console.log(dataJson);
+            })
+            .catch(console.warn);
+    }
+
+    /*document.addEventListener('DOMContentLoaded', () => {
+        document
+            .getElementById('masterConfigForm')
+            .addEventListener('submit', handleForm);
+    });*/
+
+    /////// METHOD 3
+
+    async function saveForm(dataJson) {
+
+        const response = await fetch("http://localhost:9097/IDManagement/save5", {
+            method: 'POST',
+            body: dataJson,
+            headers: {'Content-Type':'application/json'}
+        });
+
+        if (!response.ok)
+            throw `Error response code: ${response.status}`
+
+        //Optionally return the response content
+        return await response.json();
+    }
+
+    /*masterConfigForm.addEventListener("submit", event => {
+        event.preventDefault();
+
+        saveForm(masterConfigForm)
+            .then(responseContent => console.log(responseContent))
+            .catch(err => console.log(err))
+
+        console.log("done..");
+    })*/
+
+    /*const http = require('http');
+
+    const server = http.createServer(function (req, res) {
+        req.on('data', function (data) {
+            //handle data as it is received... for POST requests
+        });
+        req.on('end', function () {
+            res.setHeader('Content-Type', 'application/json');
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.writeHead(200, 'OK');
+
+            res.end('{ "data": "just a plain old json reply" }');
+        });
+    });
+
+    server.listen(9099, (err) => {
+        if (err) {
+            console.log('bad things');
+            return;
+        }
+        console.log('listening on port 9099');
+    });
+    */
+
+</script>
+
+</body>
+</html>
