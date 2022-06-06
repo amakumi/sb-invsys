@@ -1,5 +1,7 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{fragments/layout}">
 
@@ -12,25 +14,9 @@
     <title>Login</title>
 </head>
 <body>
-<!--<div layout:fragment="content" th:remove="tag">-->
+<div>
 
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <!-- Brand -->
-    <a class="navbar-brand" href="#">Service Management System</a>
-
-    <!-- Toggler/collapsibe Button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Navbar links -->
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-
-    </div>
-</nav>
-
-<!--<div class="" th:remove="tag">-->
-<div class="container my-5">
+<div layout:fragment="content" class="container my-5" style="margin-left:auto; margin-right:auto">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <h1>Login</h1>
@@ -82,13 +68,7 @@
     </div>
 
 </div>
-</body>
+</div>
 
-<footer>
-    <div class="container">
-        <p>
-            &copy; XYZ Bank
-        </p>
-    </div>
-</footer>
+</body>
 </html>
