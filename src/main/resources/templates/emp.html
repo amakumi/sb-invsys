@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
     <title>Service Management System</title>
@@ -31,6 +31,9 @@
                     <a class="nav-link" th:href="@{/idm}">IDM Management</a>
                 </li>
             </ul>
+        </div>
+        <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()">
+            <a class="nav-link" th:href="@{/logout}">Log out</a>
         </div>
     </nav>
 

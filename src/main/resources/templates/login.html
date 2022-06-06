@@ -1,0 +1,94 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+
+<head>
+    <title>Login</title>
+</head>
+<body>
+<!--<div layout:fragment="content" th:remove="tag">-->
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Service Management System</a>
+
+    <!-- Toggler/collapsibe Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar links -->
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+    </div>
+</nav>
+
+<!--<div class="" th:remove="tag">-->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Login</h1>
+
+            <form th:action="@{/login}" method="post">
+                <div th:if="${param.error}">
+                    <div class="alert alert-danger">
+                        Invalid username or password.
+                    </div>
+                </div>
+                <div th:if="${param.logout}">
+                    <div class="alert alert-info">
+                        You have been logged out.
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>:
+                    <input type="text"
+                           id="username"
+                           name="username"
+                           class="form-control"
+                           autofocus="autofocus"
+                           placeholder="Username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>:
+                    <input type="password"
+                           id="password"
+                           name="password"
+                           class="form-control"
+                           placeholder="Password">
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <input type="submit"
+                                   name="login-submit"
+                                   id="login-submit"
+                                   class="form-control btn btn-info"
+                                   value="Log In">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
+</body>
+
+<footer>
+    <div class="container">
+        <p>
+            &copy; XYZ Bank
+        </p>
+    </div>
+</footer>
+</html>
