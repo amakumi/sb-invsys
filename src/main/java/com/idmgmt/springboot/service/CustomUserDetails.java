@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
 
-    private User user;
+    private final User user;
     //private final Employee emp;
 
     public CustomUserDetails(User user) {
@@ -29,6 +29,14 @@ public class CustomUserDetails implements UserDetails {
     public String getUsername() {
         return user.getEmail();
     }
+
+    /*public String getName() {
+        return user.getFirstName();
+    }*/
+
+    /*public String getfullName() {
+        return user.getFirstName() + " " + user.getEmail();
+    }*/
 
     /*@Override
     public String getEmail() {
@@ -55,8 +63,5 @@ public class CustomUserDetails implements UserDetails {
         return true;
     }
 
-    /*public String getFullName() {
-        return user.getFirstName() + " " + user.getLastName();
-    }*/
 
 }

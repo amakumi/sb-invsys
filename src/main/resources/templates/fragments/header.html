@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
+      <!--xmlns:sec="http://www.thymeleaf.org/extras/spring-security"-->
 
 <head>
     <meta charset="UTF-8">
@@ -35,6 +36,15 @@
                     <a class="nav-link" th:href="@{/idm}">IDM Management</a>
                 </li>
             </ul>
+        </div>
+        <div sec:authorize="hasAnyRole('ROLE_ADMIN','ADMIN')">
+            <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()">
+                <ul class="navbar-nav"> <!--access="hasRole('ADMIN')"-->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user}">User List</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()">
             <ul class="navbar-nav">
