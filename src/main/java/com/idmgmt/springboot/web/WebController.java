@@ -30,4 +30,15 @@ public class WebController {
     public String accessDenied() {
         return "/error/404";
     }
+
+    /*@PostMapping("/process_register")
+    public String processRegister(User user) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
+        userRepo.save(user);
+
+        return "register_success";
+    }*/
 }
