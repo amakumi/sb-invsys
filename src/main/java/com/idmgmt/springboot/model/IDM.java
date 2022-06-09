@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Data
-@Table(name = "idm_master")
+@Table(name = "idm_detail")
 public class IDM {
 
     @Id

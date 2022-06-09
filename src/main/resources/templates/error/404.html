@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<!DOCTYPE html>
 <html lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
@@ -16,7 +16,8 @@
 
 <div class="container my-5" layout:fragment="content" th:remove="tag" style="text-align:center;margin: 0 auto">
     <h1>Oops.. Access denied</h1>
-    <p><a href="/" th:href="@{/}">Back to login</a></p>
+    <h3>It looks like you do not have the permission to access this particular link. Try contact your administrator.</h3>
+    <p><a href="/" th:href="@{/logout}">Back to login</a></p>
 </div>
 
 </body>

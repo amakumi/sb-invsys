@@ -61,6 +61,8 @@
             <div>
                 <button type="submit"  class="form-control btn btn-info">Sign Up</button>
             </div>
+
+            <a th:href = "@{/}"> Cancel</a>
             <div th:if="${param.error}">
                 <div class="alert alert-danger">
                     Invalid username or password.

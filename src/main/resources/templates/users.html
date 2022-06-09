@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="en">
 
 <head>
@@ -15,16 +16,11 @@
     <!--<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>-->
 </head>
 <body>
-
     <div layout:fragment="content" class="container text-center">
         <div>
-            <!--<form th:action="@{/logout}" method="post">
-                <p>
-                    Welcome <b>[[${#request.userPrincipal.principal.firstName}]]</b>
-                    Welcome, Admin
-                </p>
-                <input type="submit" value="Sign Out" />
-            </form>-->
+            <h4 sec:authorize="isAuthenticated()" style="display: inline-block;">
+                Hello, <strong sec:authentication="name"></strong>
+            </h4>
         </div>
         <div>
             <h1>List of Users</h1>
