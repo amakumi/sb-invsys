@@ -32,7 +32,7 @@ public class IDM_MasterImpl implements IDM_MasterService {
     @Override
     public IDM_Master getIDMById(String application_id) {
         Optional<IDM_Master> optional = idmRepository.findById(application_id);
-        IDM_Master idm = null;
+        IDM_Master idm;
         if (optional.isPresent()) {
             idm = optional.get();
         } else {

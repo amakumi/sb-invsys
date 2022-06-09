@@ -52,7 +52,7 @@ public class IDM_MasterController {
 
         // set employee as a model attribute to pre-populate the form
         model.addAttribute("idm_master", idm_master);
-        return "update_idm";
+        return "update_idm_master";
     }
 
     @GetMapping("/delete/{application_id}")

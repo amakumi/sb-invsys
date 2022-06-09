@@ -40,6 +40,11 @@ public class IDM_Master {
         return insDate;
     }
 
+    public String getORIGINAL_INSERT_DATE() {
+        //insDate = new SimpleDateFormat("dd-MMM-yy HH.mm.ss.ms.SSSS a ").format(new Timestamp(System.currentTimeMillis()));
+        return insDate;
+    }
+
     @Column(name = "update_date")
     private String updDate;
 
