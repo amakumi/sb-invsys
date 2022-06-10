@@ -1,13 +1,23 @@
 package com.idmgmt.springboot.controller;
 
 import com.idmgmt.springboot.model.IDM;
+import com.idmgmt.springboot.repository.IDMRepository;
 import com.idmgmt.springboot.service.IDMService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -16,7 +26,8 @@ public class IDMController {
 
     @Autowired
     private IDMService idmService;
-
+    @Autowired
+    private IDMRepository repo;
     // display list of employees
     /*@GetMapping("/")
     public String viewHomePage(Model model) {
@@ -83,5 +94,35 @@ public class IDMController {
 
         model.addAttribute("listIDMs", listIDMs);
         return "idm";
+    }
+
+    public List<IDM> listAll() {
+        return repo.findAll(Sort.by("id").ascending());
+    }
+
+    @GetMapping("/export")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=export_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+        List<IDM> listIDMs = listAll();
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = {"App ID", "Function Name", "Endpoint", "Parameters", "Insert date", "Update date", "HTTP Method"};
+        String[] nameMapping = {"id", "function", "endpoint", "params", "insDate", "updDate", "http"};
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (IDM idm : listIDMs) {
+            csvWriter.write(idm, nameMapping);
+        }
+
+        csvWriter.close();
+
     }
 }

@@ -74,7 +74,9 @@
 
     <a th:href = "@{/idm/showNewIDMForm}" class="btn btn-primary btn-sm mb-3"> Register New IDM </a>
 
-    <div th:if = "${totalPages > 1}">
+        <a th:href="@{/idm/export}" class="btn btn-primary btn-sm mb-3">Export to CSV</a>
+
+        <div th:if = "${totalPages > 1}">
         <div class = "row col-sm-10">
             <div class = "col-sm-2">
                 Total Rows: [[${totalItems}]]
