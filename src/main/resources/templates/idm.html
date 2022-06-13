@@ -18,7 +18,7 @@
 <body>
 <div layout:fragment="content">
 
-    <div class="container my-2">
+    <div class="container my-5" >
 
         <h1>IDM List</h1>
 
@@ -66,7 +66,7 @@
                 <td th:text="${idm.updDate}"></td>
                 <td th:text="${idm.http}"></td>
                 <td> <a th:href="@{/idm/showFormForUpdate/{id}(id=${idm.id})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/idm/delete/{id}(id=${idm.id})}" class="btn btn-danger">Delete</a>
+
                 </td>
             </tr>
             </tbody>

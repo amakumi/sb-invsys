@@ -1,6 +1,8 @@
 package com.idmgmt.springboot.config;
 
 import com.idmgmt.springboot.service.CustomUserDetailsService;
+import com.idmgmt.springboot.web.CustomLoginFailureHandler;
+import com.idmgmt.springboot.web.CustomLoginSuccessHandler;
 import com.idmgmt.springboot.web.LoggingAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,6 +26,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private LoggingAccessDeniedHandler accessDeniedHandler;
 
+    @Autowired
+    private CustomLoginFailureHandler loginFailureHandler;
+
+    @Autowired
+    private CustomLoginSuccessHandler loginSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -36,8 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .loginPage("/login")
-                    //.successHandler(successHandler())
                     .defaultSuccessUrl("/emp", true)
+                    .failureHandler(loginFailureHandler)
+                    .failureUrl("/login?error")
+                    //.successHandler(loginSuccessHandler)
                 .permitAll();
         http
                 .logout()

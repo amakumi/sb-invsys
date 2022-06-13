@@ -93,7 +93,7 @@
 
             <button type="submit" class="btn btn-info col-2"> Update IDM</button>
     </form>
-
+        <a th:href="@{/idm/delete/{id}(id=${idm.id})}" class="btn btn-danger">Delete</a>
     <hr>
 
     <a th:href = "@{/}"> Cancel</a>
