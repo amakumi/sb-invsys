@@ -10,3 +10,8 @@ footer {
 footer p {
     padding: 15px;
 }
+
+body {
+    background: red;
+    height: 100%;
+}

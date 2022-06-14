@@ -15,8 +15,16 @@
 
 <body>
 <th:block th:fragment="footer">
-    <footer>
-        <div class="container">
+    <footer
+            style="
+                background: darkgrey;
+                color: #cccccc;
+                position: absolute;
+                height: 50px;
+                bottom:0;
+                width:100%;
+            ">
+        <div class="container my-2">
             <p>
                 &copy; XYZ Bank
                 <span sec:authorize="isAuthenticated()" style="display: inline-block;">
