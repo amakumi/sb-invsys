@@ -56,7 +56,7 @@ public class UserService {
         String content = "Dear [[name]], <br>"
                 + "Please click the link below to verify your registration:<br>"
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">Verify your email</a></h3>"
-                + "Thank you,<br>"
+                + "<br>Thank you,<br>"
                 + "XYZ Systems.";
 
         MimeMessage message = mailSender.createMimeMessage();
