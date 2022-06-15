@@ -32,6 +32,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private CustomLoginSuccessHandler loginSuccessHandler;
 
+    /*@Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http
+                .requiresChannel(channel ->
+                        channel.anyRequest().requiresSecure())
+                .authorizeRequests(authorize ->
+                        authorize.anyRequest().permitAll())
+                .build();
+    }*/
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -46,7 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginPage("/login")
                     .defaultSuccessUrl("/home", true)
                     .failureHandler(loginFailureHandler)
-                    .failureUrl("/login?error")
+                    .failureForwardUrl("/login?error")
                     //.successHandler(loginSuccessHandler)
                 .permitAll();
         http
