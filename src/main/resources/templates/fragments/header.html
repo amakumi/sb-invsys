@@ -41,7 +41,7 @@
             </ul>
         </div>
         <div sec:authorize="hasAnyRole('ROLE_ADMIN','ADMIN')">
-            <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()">
+            <div class="nav-item" sec:authorize="isAuthenticated()">
                 <ul class="navbar-nav"> <!--access="hasRole('ADMIN')"-->
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/user}">User List</a>
@@ -49,20 +49,48 @@
                 </ul>
             </div>
         </div>
-        <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()">
-            <ul class="navbar-nav"> <!--access="hasRole('ADMIN')"-->
+
+        <div class="" sec:authorize="isAuthenticated()">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/profile}"><strong sec:authentication="name"></strong></a>
                 </li>
-            </ul>
-        </div>
-        <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()">
-            <ul class="navbar-nav">
+
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/logout}">Log out</a>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a
+                            class="nav-link dropdown-toggle"
+                            id="navbarDropdown"
+                            role="button"
+                            data-mdb-toggle="dropdown"
+                            aria-expanded="false"
+                    >
+                       User
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/profile}"><strong sec:authentication="name"></strong></a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/profile}">Customisation</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/logout}">Log out</a>
+                        </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </li>
+                    </ul>
+                </li>
+             <!--access="hasRole('ADMIN')"-->
             </ul>
         </div>
+
     </nav>
 </th:block>
 </body>

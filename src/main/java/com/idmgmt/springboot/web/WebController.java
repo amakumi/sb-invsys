@@ -1,5 +1,6 @@
 package com.idmgmt.springboot.web;
 
+import com.idmgmt.springboot.service.UserService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WebController {
+
+    UserService userService;
 
     @GetMapping("/")
     public String root() {
@@ -48,6 +51,11 @@ public class WebController {
 
     @GetMapping("/profile")
     public String profile() {
+        //String userEmail = userDetails.getEmail();
+        //User user = userService.getUserByUserEmail(userEmail);
+
+        //model.addAttribute("user", user);
+
         return "profile";
     }
 

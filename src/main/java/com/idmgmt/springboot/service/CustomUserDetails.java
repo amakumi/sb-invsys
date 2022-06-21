@@ -9,6 +9,7 @@ import java.util.Collection;
 public class CustomUserDetails implements UserDetails {
 
     private final User user;
+
     //private final Employee emp;
 
     public CustomUserDetails(User user) {
@@ -27,19 +28,18 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getFirstName();
     }
 
     /*public String getName() {
         return user.getFirstName();
     }*/
-
-    /*public String getfullName() {
-        return user.getFirstName() + " " + user.getEmail();
-    }*/
+    public String getFullName() {
+        return user.getFirstName();
+    }
 
     //@Override
-    public String getByEmail() {
+    public String getEmail() {
         return user.getEmail();
     }
 

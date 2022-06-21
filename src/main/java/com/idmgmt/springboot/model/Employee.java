@@ -35,6 +35,8 @@ public class Employee {
     @Column(name = "department_id")
     private String deptID;
 
+    private String fullName = firstName + lastName;
+
 	/*public long getId() {
 		return id;
 	}

@@ -24,6 +24,9 @@ public class User {
     @Column(name = "user_pw", nullable = false)
     private String password;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @Column(name = "acc_non_locked")
     private boolean accountNonLocked;
 
@@ -32,9 +35,6 @@ public class User {
 
     @Column(name = "lock_time")
     private Date lockTime;
-
-    @Column(name = "email", nullable = false)
-    private String email;
 
     @Column(name = "verification_code", length = 64)
     private String verificationCode;
