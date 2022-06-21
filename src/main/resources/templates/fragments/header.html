@@ -50,6 +50,13 @@
             </div>
         </div>
         <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()">
+            <ul class="navbar-nav"> <!--access="hasRole('ADMIN')"-->
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/profile}"><strong sec:authentication="name"></strong></a>
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse" sec:authorize="isAuthenticated()">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/logout}">Log out</a>

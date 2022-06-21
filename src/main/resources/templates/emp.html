@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{fragments/layout}">
 
 <head>
@@ -62,7 +63,11 @@
                     <td th:text="${employee.gender}"></td>
                     <td th:text="${employee.deptID}"></td>
 					<td> <a th:href="@{/emp/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
-					    <a th:href="@{/emp/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
+                        <div sec:authorize="hasAnyRole('ROLE_ADMIN','ADMIN')">
+                            <div sec:authorize="isAuthenticated()">
+                                <a th:href="@{/emp/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
 					</td>
 				</tr>
 			</tbody>

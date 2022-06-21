@@ -46,6 +46,11 @@ public class WebController {
         return "/error/404";
     }
 
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
+
     /*@PostMapping("/process_register")
     public String processRegister(User user) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
