@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>IDM Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Update Service</h2>
+
+    <form action="#" class="masterUpdateForm" method="POST" th:action="@{/service/update}" th:object="${function}">
+        <table>
+            <tr>
+                <td><label for="id">Application ID</label></td>
+                <td>
+                    <input readonly th:field="*{id}" type="text" name="id" id="id" placeholder="ex. GITLAB" required/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="function">Function
+                        <select name="function" required>
+                            <option disabled selected>Choose backend service type</option>
+                            <option id="function" value="WEB_SERVICE">WEB_SERVICE</option>
+                            <option value="API_INTERNAL">API_INTERNAL</option>
+                            <option value="BASE_24">BASE_24</option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="http" >
+                        Set Protocol
+                        <input type = "radio" name = "http" value="HTTPS" id="http" required> HTTPS
+                        <input type = "radio" name = "http" value="HTTP" required> HTTP
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td><label for="params">Parameters</label></td>
+                <td>
+                    <input th:field="*{params}" type="text" name="params" id="params" placeholder="ex: gitlab.backoffice.pcf.dti.co.id" required/>
+                </td>
+            </tr>
+
+            <!--<tr>
+                <td>
+                    <label for="endpoint">Endpoint</label>
+                    <input type="number" name="endpoint" id="endpoint" placeholder="ex. 443" required/>
+                </td>
+            </tr>-->
+
+            <tr>
+                <td>
+                    <label for="insDate">Insert date</label>
+                    <input th:field="*{insDate}" type="datetime-local" name="insDate" id="insDate"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="updDate">Update date</label>
+                    <input th:field="*{updDate}" type="date" name="updDate" id="updDate" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="endpoint">Endpoint
+                        <select name="endpoint" required>
+                            <option disabled selected>Choose status</option>
+                            <option id="endpoint" value="Development">Development</option>
+                            <option value="UAT">UAT</option>
+                            <option value="Production">Production</option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+        </table>
+
+        <button type="submit" class="btn btn-info col-2"> Update Service</button>
+    </form>
+    <a th:href="@{/service/delete/{id}(id=${function.id})}" class="btn btn-danger">Delete</a>
+    <hr>
+
+    <a th:href = "@{/}"> Cancel</a>
+</div>
+</body>
+</html>

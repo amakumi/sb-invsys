@@ -48,9 +48,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/register", "/process_register", "/verify").permitAll()
-                .antMatchers("/admin/**", "/user/**").hasAnyRole("ROLE_ADMIN","ADMIN")
+                .antMatchers("/admin/**", "/user/**").hasAnyRole("EXECUTIVE","ADMIN")
                 //.antMatchers().hasAnyRole("USER")
-                .antMatchers("/idm/**", "/emp/**", "/idmv1/**", "/home").authenticated()
+                .antMatchers("/idm/**", "/emp/**", "/idmv1/**", "/home", "/service/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .failureHandler(loginFailureHandler)
                     .failureForwardUrl("/login?error")
                     //.successHandler(loginSuccessHandler)
-                .permitAll();
+                    .permitAll();
         http
                 .logout()
                 .invalidateHttpSession(true)
