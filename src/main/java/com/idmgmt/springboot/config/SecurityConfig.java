@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -46,8 +48,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/register", "/process_register", "/verify").permitAll()
+                .antMatchers("/", "/register", "/process_register", "/verify", "/report/**").permitAll()
                 .antMatchers("/admin/**", "/user/**").hasAnyRole("EXECUTIVE","ADMIN")
                 //.antMatchers().hasAnyRole("USER")
                 .antMatchers("/idm/**", "/emp/**", "/idmv1/**", "/home", "/service/**").authenticated()
@@ -75,8 +78,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .csrfTokenRepository(new HttpSessionCsrfTokenRepository());
         http
-                .csrf().disable();
+                .headers()
+                //.addHeaderWriter(new StaticHeadersWriter("Report-To", REPORT_TO))
+                .addHeaderWriter(new StaticHeadersWriter("X-Content-Security-Policy","script-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, prefetch-src, form-action 'self'"))
+                .xssProtection()
+                .and()
+                .contentSecurityPolicy("script-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, prefetch-src, form-action 'self'; report-uri /report; report-to /csp-violation-report")
+                .and()
+                .contentTypeOptions()
+                .and()
+                .cacheControl()
+                .and()
+                .httpStrictTransportSecurity()
+                .and()
+                .frameOptions();
+        http
+                .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository
+                        .withHttpOnlyFalse());
     }
+
+    String REPORT_TO = "{\"group\":\"csp-violation-report\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://localhost:8443/report\"}]}";
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

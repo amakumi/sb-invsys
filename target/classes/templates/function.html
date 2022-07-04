@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Service Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="container my-5">
+
+        <h1>IDM Service List</h1>
+
+        <table border="1" class = "table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>
+                    <a th:href="@{'/service/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
+                        Service name</a>
+                </th>
+                <th>
+                    <a th:href="@{'/service/page/' + ${currentPage} + '?sortField=createdby&sortDir=' + ${reverseSortDir}}">
+                        Created by</a>
+                </th>
+                <th>
+                    <a th:href="@{'/service/page/' + ${currentPage} + '?sortField=function&sortDir=' + ${reverseSortDir}}">
+                        Function</a>
+                </th>
+                <th>
+                    <a th:href="@{'/service/page/' + ${currentPage} + '?sortField=endpoint&sortDir=' + ${reverseSortDir}}">
+                        Endpoint</a>
+                </th>
+                <th>
+                    <a th:href="@{'/service/page/' + ${currentPage} + '?sortField=insDate&sortDir=' + ${reverseSortDir}}">
+                        Insert date</a>
+                </th>
+                <th>
+                    <a th:href="@{'/service/page/' + ${currentPage} + '?sortField=updDate&sortDir=' + ${reverseSortDir}}">
+                        Update date</a>
+                </th>
+                <th>
+                    <a th:href="@{'/service/page/' + ${currentPage} + '?sortField=params&sortDir=' + ${reverseSortDir}}">
+                        Parameters</a>
+                </th>
+                <th>
+                    <a th:href="@{'/service/page/' + ${currentPage} + '?sortField=http&sortDir=' + ${reverseSortDir}}">
+                        HTTP Method</a>
+                </th>
+                <th> Actions </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="function : ${listFunctions}">
+                <td th:text="${function.id}"></td>
+                <td th:text="${function.createdby}"></td>
+                <td th:text="${function.function}"></td>
+                <td th:text="${function.endpoint}"></td>
+                <td th:text="${function.insDate}"></td>
+                <td th:text="${function.updDate}"></td>
+                <td th:text="${function.params}"></td>
+                <td th:text="${function.http}"></td>
+
+                <td> <a th:href="@{/service/update/{id}(id=${function.id})}" class="btn btn-primary">Update</a>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a th:href = "@{/service/showNewFunctionForm}" class="btn btn-primary btn-sm mb-3"> Register New Service </a>
+
+        <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+                <div class = "col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/service/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>
+					</span>
+                </div>
+                <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/service/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/service/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

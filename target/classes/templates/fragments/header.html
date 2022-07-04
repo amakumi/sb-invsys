@@ -1,0 +1,100 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="en">
+      <!--xmlns:sec="http://www.thymeleaf.org/extras/spring-security"-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/main.css}"/>
+
+</head>
+<body>
+<th:block th:fragment="header">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" th:href="@{/home}">Service Management System</a>
+
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon">Test</span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar" sec:authorize="isAuthenticated()">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/emp}">Employee Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/idm}">IDM Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/idmv1}">IDM Master</a>
+                </li>
+               <!-- <li class="nav-item">
+                    <a class="nav-link" th:href="@{/service}">Service</a>
+                </li>-->
+            </ul>
+        </div>
+        <div sec:authorize="hasAnyRole('ROLE_ADMIN','ADMIN')">
+            <div class="nav-item" sec:authorize="isAuthenticated()">
+                <ul class="navbar-nav"> <!--access="hasRole('ADMIN')"-->
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user}">User List</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="" sec:authorize="isAuthenticated()">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 ">
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/profile}"><strong sec:authentication="name"></strong></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/logout}">Log out</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a
+                            class="nav-link dropdown-toggle"
+                            id="navbarDropdown"
+                            role="button"
+                            data-mdb-toggle="dropdown"
+                            aria-expanded="false"
+                    >
+                       User
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" th:href="@{/profile}"><strong sec:authentication="name"></strong></a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/profile}">Customisation</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" th:href="@{/logout}">Log out</a>
+                        </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        </li>
+                    </ul>
+                </li>
+             <!--access="hasRole('ADMIN')"-->
+            </ul>
+        </div>
+
+    </nav>
+</th:block>
+</body>
+</html>
