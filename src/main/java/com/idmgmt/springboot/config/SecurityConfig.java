@@ -77,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .csrfTokenRepository(new HttpSessionCsrfTokenRepository());
-        /*http
+        http
                 .headers()
                 //.addHeaderWriter(new StaticHeadersWriter("Report-To", REPORT_TO))
                 .addHeaderWriter(new StaticHeadersWriter("X-Content-Security-Policy","script-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, prefetch-src, form-action 'self'"))
@@ -91,7 +91,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpStrictTransportSecurity()
                 .and()
-                .frameOptions();*/
+                .frameOptions();
         http
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository
