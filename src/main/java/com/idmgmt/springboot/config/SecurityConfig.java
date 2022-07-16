@@ -92,10 +92,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpStrictTransportSecurity()
                 .and()
                 .frameOptions();*/
-        http
+        /*http
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository
-                        .withHttpOnlyFalse());
+                        .withHttpOnlyFalse());*/
     }
 
     String REPORT_TO = "{\"group\":\"csp-violation-report\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://localhost:8443/report\"}]}";
