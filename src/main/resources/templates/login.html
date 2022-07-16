@@ -12,14 +12,25 @@
 
 <head>
     <title>Login</title>
-    <meta http-equiv="X-Content-Security-Policy" content="form-action 'self';">
+    <!--<meta http-equiv="X-Content-Security-Policy" content="form-action 'self';">-->
+    <style>
+        body {
+            background-image: url("https://barbarashdwallpapers.com/wp-content/uploads/2015/05/White-wave-pattern-wallpaper-1.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #cccccc;
+
+        input.right {
+            float: right;
+        }
+    </style>
 </head>
 <body>
 <div>
 
-<div layout:fragment="content" class="container my-5" style="margin-left:auto; margin-right:auto">
+<div layout:fragment="content" class="container my-5" style="margin-left:auto; margin-right:auto;">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-6 col-md-offset-3" style="background:#f8f8f8; ">
             <h1>Login</h1>
 
             <form th:action="@{/login}" method="post">
@@ -59,19 +70,21 @@
 
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3">
+                        <div class="col-lg-5 col-xl-offset-1">
                             <input type="submit"
                                    name="login-submit"
                                    id="login-submit"
-                                   class="form-control btn btn-success"
+                                   class="right form-control btn btn-success float-end"
                                    value="Log In">
                         </div>
                     </div>
                 </div>
             </form>
             <div class="form-group">
-                <div>
-                    <h5><a class="form-control btn btn-info" th:href="@{/register}">Register</a></h5>
+                <div class="row">
+                    <div class="col-xl-5 col-md-offset-1">
+                        <h5><a class="form-control btn btn-info right" th:href="@{/register}">Register</a></h5>
+                    </div>
                 </div>
             </div>
         </div>
