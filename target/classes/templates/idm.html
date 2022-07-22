@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Service Management System</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="container my-5" >
+
+        <h1>IDM List</h1>
+        <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+        <div class="alert alert-primary" role="alert" th:text="${primary}" th:if="${primary}"></div>
+
+        <table border="1" class = "table table-striped table-responsive-md">
+            <thead>
+                <tr>
+                    <th>
+                        <a th:href="@{'/idm/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">
+                            App ID</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/idm/page/' + ${currentPage} + '?sortField=function&sortDir=' + ${reverseSortDir}}">
+                             IDM Function</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/idm/page/' + ${currentPage} + '?sortField=endpoint&sortDir=' + ${reverseSortDir}}">
+                            Endpoint</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/idm/page/' + ${currentPage} + '?sortField=params&sortDir=' + ${reverseSortDir}}">
+                            Parameters</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/idm/page/' + ${currentPage} + '?sortField=insDate&sortDir=' + ${reverseSortDir}}">
+                            Insert date</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/idm/page/' + ${currentPage} + '?sortField=updDate&sortDir=' + ${reverseSortDir}}">
+                            Update date</a>
+                    </th>
+                    <th>
+                        <a th:href="@{'/idm/page/' + ${currentPage} + '?sortField=http&sortDir=' + ${reverseSortDir}}">
+                            HTTP Method</a>
+                    </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="idm : ${listIDMs}">
+                <td th:text="${idm.id}"></td>
+                <td th:text="${idm.function}"></td>
+                <td th:text="${idm.endpoint}"></td>
+                <td th:text="${idm.params}"></td>
+                <td th:text="${idm.insDate}"></td>
+                <td th:text="${idm.updDate}"></td>
+                <td th:text="${idm.http}"></td>
+
+                <td> <a th:href="@{/idm/showFormForUpdate/{id}(id=${idm.id})}" class="btn btn-primary">Update</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    <a th:href = "@{/idm/showNewIDMForm}" class="btn btn-primary btn-sm mb-3"> Register New IDM </a>
+
+        <a th:href="@{/idm/export}" class="btn btn-primary btn-sm mb-3">Export to CSV</a>
+
+        <div th:if = "${totalPages > 1}">
+        <div class = "row col-sm-10">
+            <div class = "col-sm-2">
+                Total Rows: [[${totalItems}]]
+            </div>
+            <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/idm/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>
+					</span>
+            </div>
+            <div class = "col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/idm/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+            </div>
+
+            <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/idm/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
