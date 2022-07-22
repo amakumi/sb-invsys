@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -37,29 +38,40 @@ public class IDM_MasterController {
     }
 
     @PostMapping("/saveIDM")
-    public String saveIDM(@ModelAttribute("idm_master") IDM_Master idm) {
+    public String saveIDM(@ModelAttribute("idm_master") IDM_Master idm, RedirectAttributes attr) {
         // save employee to database
 
         idmService.saveIDM(idm);
+        attr.addFlashAttribute("success", "IDM Master Service has been successfully added");
+        return "redirect:/idmv1";
+    }
+
+    @PostMapping("/saveIDM2")
+    public String saveIDM2(@ModelAttribute("idm_master") IDM_Master idm, RedirectAttributes attr) {
+        // save employee to database
+        idmService.saveIDM(idm);
+        attr.addFlashAttribute("primary", "IDM Master Service has been successfully updated");
         return "redirect:/idmv1";
     }
 
     @GetMapping("/showFormForUpdate/{application_id}")
-    public String showFormForUpdate(@PathVariable(value = "application_id") String id, Model model) {
+    public String showFormForUpdate(@PathVariable(value = "application_id") String id, Model model, RedirectAttributes attr) {
 
         // get employee from the service
         IDM_Master idm_master = idmService.getIDMById(id);
 
         // set employee as a model attribute to pre-populate the form
         model.addAttribute("idm_master", idm_master);
+        attr.addFlashAttribute("primary", "IDM Master Service has been successfully updated");
         return "update_idm_master";
     }
 
     @GetMapping("/delete/{application_id}")
-    public String deleteIDM(@PathVariable(value = "application_id") String id) {
+    public String deleteIDM(@PathVariable(value = "application_id") String id, RedirectAttributes attr) {
 
         // call delete employee method
         this.idmService.deleteIDMById(id);
+        attr.addFlashAttribute("error", "IDM Master Service has been removed");
         return "redirect:/idmv1";
     }
 

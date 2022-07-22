@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -32,28 +33,39 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/saveEmployee")
-	public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+	public String saveEmployee(@ModelAttribute("employee") Employee employee, RedirectAttributes attr) {
 		// save employee to database
 		employeeService.saveEmployee(employee);
+        attr.addFlashAttribute("success", "Employee Added");
 		return "redirect:/emp";
 	}
 
+    @PostMapping("/saveEmployee2")
+    public String saveEmployee2(@ModelAttribute("employee") Employee employee, RedirectAttributes attr) {
+        // save employee to database
+        employeeService.saveEmployee(employee);
+        attr.addFlashAttribute("primary", "Employee info updated");
+        return "redirect:/emp";
+    }
+
 	@GetMapping("/showFormForUpdate/{id}")
-	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model) {
+	public String showFormForUpdate(@PathVariable ( value = "id") long id, Model model, RedirectAttributes attr) {
 
 		// get employee from the service
 		Employee employee = employeeService.getEmployeeById(id);
 
 		// set employee as a model attribute to pre-populate the form
 		model.addAttribute("employee", employee);
+        attr.addFlashAttribute("primary", "Employee info updated");
 		return "update_employee";
 	}
 
 	@GetMapping("/deleteEmployee/{id}")
-	public String deleteEmployee(@PathVariable (value = "id") long id) {
+	public String deleteEmployee(@PathVariable (value = "id") long id, RedirectAttributes attr) {
 
 		// call delete employee method
 		this.employeeService.deleteEmployeeById(id);
+        attr.addFlashAttribute("error", "Employee Removed");
 		return "redirect:/emp";
 	}
 

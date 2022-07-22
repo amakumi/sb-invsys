@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
@@ -48,28 +49,39 @@ public class IDMController {
     }
 
     @PostMapping("/saveIDM")
-    public String saveIDM(@ModelAttribute("idm") IDM idm) {
+    public String saveIDM(@ModelAttribute("idm") IDM idm, RedirectAttributes attr) {
         // save employee to database
         idmService.saveIDM(idm);
+        attr.addFlashAttribute("success","IDM successfully added");
+        return "redirect:/idm";
+    }
+
+    @PostMapping("/saveIDM2")
+    public String saveIDM2(@ModelAttribute("idm") IDM idm, RedirectAttributes attr) {
+        // save employee to database
+        idmService.saveIDM(idm);
+        attr.addFlashAttribute("primary","IDM successfully updated");
         return "redirect:/idm";
     }
 
     @GetMapping("/showFormForUpdate/{application_id}")
-    public String showFormForUpdate(@PathVariable(value = "application_id") String id, Model model) {
+    public String showFormForUpdate(@PathVariable(value = "application_id") String id, Model model, RedirectAttributes attr) {
 
         // get employee from the service
         IDM idm = idmService.getIDMById(id);
 
         // set employee as a model attribute to pre-populate the form
         model.addAttribute("idm", idm);
+        attr.addFlashAttribute("updated","IDM successfully updated");
         return "update_idm";
     }
 
     @GetMapping("/delete/{application_id}")
-    public String deleteIDM(@PathVariable(value = "application_id") String id) {
+    public String deleteIDM(@PathVariable(value = "application_id") String id, RedirectAttributes attr) {
 
         // call delete employee method
         this.idmService.deleteIDMById(id);
+        attr.addFlashAttribute("error", "IDM successfully removed");
         return "redirect:/idm";
     }
 

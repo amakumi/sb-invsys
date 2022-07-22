@@ -21,11 +21,9 @@
     <div class="container my-5" >
 
         <h1>IDM List</h1>
-        <div th:if="${authenticated}">
-            <div class="alert alert-success">
-                Loaded
-            </div>
-        </div>
+        <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+        <div class="alert alert-primary" role="alert" th:text="${primary}" th:if="${primary}"></div>
 
         <table border="1" class = "table table-striped table-responsive-md">
             <thead>
