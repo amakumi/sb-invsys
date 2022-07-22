@@ -32,7 +32,7 @@ public class IDMServiceImpl implements IDMService {
     @Override
     public IDM getIDMById(String application_id) {
         Optional<IDM> optional = idmRepository.findById(application_id);
-        IDM idm = null;
+        IDM idm;
         if (optional.isPresent()) {
             idm = optional.get();
         } else {

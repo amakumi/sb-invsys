@@ -6,7 +6,7 @@
       layout:decorate="~{fragments/layout}">
 
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <title>Service Management System</title>
 
     <link rel="stylesheet"
@@ -65,8 +65,8 @@
                 <td th:text="${idm.insDate}"></td>
                 <td th:text="${idm.updDate}"></td>
                 <td th:text="${idm.http}"></td>
-                <td> <a th:href="@{/idm/showFormForUpdate/{id}(id=${idm.id})}" class="btn btn-primary">Update</a>
 
+                <td> <a th:href="@{/idm/showFormForUpdate/{id}(id=${idm.id})}" class="btn btn-primary">Update</a>
                 </td>
             </tr>
             </tbody>
