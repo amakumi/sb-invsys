@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       lang="en"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org"
+
       layout:decorate="~{fragments/layout}">
 
 <link rel="stylesheet"
@@ -19,7 +19,7 @@
             background-repeat: no-repeat;
             background-size: cover;
             background-color: #cccccc;
-
+        }
         input.right {
             float: right;
         }
@@ -34,6 +34,7 @@
             <h1>Login</h1>
 
             <form th:action="@{/login}" method="post">
+
                 <div th:if="${param.error}">
                     <div class="alert alert-danger">
                         Invalid username or password.
@@ -44,11 +45,7 @@
                         You have been logged out.
                     </div>
                 </div>
-                <div th:if="${param.error}">
-                    <div class="alert alert-danger">
-                        <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
-                    </div>
-                </div>
+
 
                 <div class="form-group">
                     <label for="username">Username</label>:

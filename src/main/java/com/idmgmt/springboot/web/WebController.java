@@ -1,6 +1,7 @@
 package com.idmgmt.springboot.web;
 
 import com.idmgmt.springboot.service.UserService;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -31,9 +32,9 @@ public class WebController {
     public String login(Model model) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        //if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-        //    return "login";
-        //}
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "login";
+        }
 
         return "redirect:/home";
     }
