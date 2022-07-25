@@ -16,7 +16,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -74,7 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .csrfTokenRepository(new HttpSessionCsrfTokenRepository());
-        /*http
+        http
                 .headers()
                 //.addHeaderWriter(new StaticHeadersWriter("Report-To", REPORT_TO))
                 .addHeaderWriter(new StaticHeadersWriter("X-Content-Security-Policy","script-src, style-src, img-src, connect-src, frame-src, frame-ancestors, font-src, media-src, object-src, manifest-src, prefetch-src, form-action 'self'"))
@@ -89,10 +91,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpStrictTransportSecurity()
                 .and()
                 .frameOptions();*/
-        /*http
+        http
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository
-                        .withHttpOnlyFalse());*/
+                        .withHttpOnlyFalse());
     }
 
     String REPORT_TO = "{\"group\":\"csp-violation-report\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://localhost:8443/report\"}]}";
