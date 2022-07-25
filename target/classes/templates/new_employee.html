@@ -19,7 +19,7 @@
         label {
             flex-direction: row;
             justify-content: flex-end;
-            text-align: right;
+            text-align: left;
             width: 400px;
             line-height: 36px;
             margin-bottom: 12px;
@@ -37,48 +37,69 @@
 
 		<h2>New Employee</h2>
         <hr>
+    <table>
 		<form action="#" th:action="@{/emp/saveEmployee}" th:object="${employee}"
 			method="POST">
-            <label>
-                <input type="text" th:field="*{firstName}"
-                    placeholder="Employee First Name" class="form-control">
-            </label>
+            <tr>
+                <td>
+                <label>
+                    <input type="text" th:field="*{firstName}"
+                        placeholder="Employee First Name" class="form-control">
+                </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>
+                    <input type="text" th:field="*{lastName}"
+                    placeholder="Employee Last Name" class="form-control">
+                </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>
+                    <input type="text" th:field="*{email}"
+                    placeholder="Employee Email" class="form-control">
+                </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <label>Date of birth</label>
+
+                    <input type="date" th:field="*{dob}"
+                           placeholder="Employee date of birth" class="form-control" >
+
+                </td>
+            </tr>
             <br>
-            <label>
-                <input type="text" th:field="*{lastName}"
-                placeholder="Employee Last Name" class="form-control">
-            </label>
+            <tr>
+                <td>
+                    <label>Gender
+                        <!--<input type="radio" th:field="*{gender}">Gender-->
+                        <input type="radio" id="male" name="gender" value="Male">Male
+                        <input type="radio" id="female" name="gender" value="Female">Female
+                    </label>
+                </td>
+            </tr>
+
             <br>
-            <label>
-                <input type="text" th:field="*{email}"
-                placeholder="Employee Email" class="form-control">
-            </label>
+            <tr>
+                <td>
+                <label></label>
+                    <input type="text" th:field="*{deptID}"
+                           placeholder="Employee Dept ID" class="form-control">
+
+                </td>
+            </tr>
+        </table>
             <br>
-            <label>
-                <input type="date" th:field="*{dob}"
-                       placeholder="Employee date of birth" class="form-control" >
-            </label>
-            <br>
-            <label class="form-control mb-4 col-4">
-                <!--<input type="radio" th:field="*{gender}">Gender-->
-                <input type="radio" id="male" name="gender" value="Male">
-                    <label for="male">Male</label><br>
-            </label>
-            <label class="form-control mb-4 col-4">
-                <input type="radio" id="female" name="gender" value="Female">
-                    <label for="female">Female</label><br>
-            </label>
-            <br>
-            <label>
-                <input type="text" th:field="*{deptID}"
-                       placeholder="Employee Dept ID" class="form-control">
-            </label>
-            <br>
-            <button type="submit" class="btn btn-info col-2"> Register Employee</button>
+            <button type="submit" class="btn btn-info col-2" style="position: absolute; right: 15%;"> Register Employee</button>
 		</form>
 		
 		<hr>
-		
+
 		<a th:href = "@{/home}"> Cancel</a>
 	</div>
 

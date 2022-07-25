@@ -52,7 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/register", "/process_register", "/verify", "/report/**").permitAll()
                 .antMatchers("/admin/**", "/user/**").hasAnyRole("EXECUTIVE","ADMIN")
-                //.antMatchers().hasAnyRole("USER")
                 .antMatchers("/idm/**", "/emp/**", "/idmv1/**", "/home", "/service/**").authenticated()
                 .anyRequest().authenticated()
                 .and()
@@ -91,10 +90,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpStrictTransportSecurity()
                 .and()
                 .frameOptions();*/
-        http
+        /*http
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository
-                        .withHttpOnlyFalse());
+                        .withHttpOnlyFalse());*/
     }
 
     String REPORT_TO = "{\"group\":\"csp-violation-report\",\"max_age\":2592000,\"endpoints\":[{\"url\":\"https://localhost:8443/report\"}]}";
