@@ -64,7 +64,7 @@
                     <td th:text="${employee.dob}"></td>
                     <td th:text="${employee.gender}"></td>
                     <td th:text="${employee.deptID}"></td>
-					<td> <a th:href="@{/emp/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">Update</a>
+					<td> <a th:href="@{/emp/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-info">Update</a>
                         <div sec:authorize="hasAnyRole('ROLE_ADMIN','ADMIN')">
                             <div sec:authorize="isAuthenticated()">
                                 <a th:href="@{/emp/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
