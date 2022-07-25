@@ -53,7 +53,7 @@ public class UserService {
         String fromAddress = "invsys.ad@gmail.com";
         String senderName = "INV SYS SERVICE";
         String subject = "Please verify your email registration";
-        String content = "Dear [[name]], <br>"
+        String content = "Dear XYZ Employee[[name]], <br>"
                 + "Please click the link below to verify your registration:<br>"
                 + "<h3><a href=\"[[URL]]\" target=\"_self\">Verify your email</a></h3>"
                 + "<br>Thank you,<br>"

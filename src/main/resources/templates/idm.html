@@ -69,15 +69,15 @@
                 <td th:text="${idm.updDate}"></td>
                 <td th:text="${idm.http}"></td>
 
-                <td> <a th:href="@{/idm/showFormForUpdate/{id}(id=${idm.id})}" class="btn btn-primary">Update</a>
+                <td> <a th:href="@{/idm/showFormForUpdate/{id}(id=${idm.id})}" class="btn btn-info">Update</a>
                 </td>
             </tr>
             </tbody>
         </table>
 
-    <a th:href = "@{/idm/showNewIDMForm}" class="btn btn-primary btn-sm mb-3"> Register New IDM </a>
+    <a th:href = "@{/idm/showNewIDMForm}" class="btn btn-success btn-sm mb-3"> Register New IDM </a>
 
-        <a th:href="@{/idm/export}" class="btn btn-primary btn-sm mb-3">Export to CSV</a>
+        <a th:href="@{/idm/export}" class="btn btn-info btn-sm mb-3">Export to CSV</a>
 
         <div th:if = "${totalPages > 1}">
         <div class = "row col-sm-10">

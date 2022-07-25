@@ -74,14 +74,14 @@
                 <td th:text="${idm_master.hostname}"></td>
                 <td th:text="${idm_master.port}"></td>
 
-                <td> <a th:href="@{/idmv1/showFormForUpdate/{id}(id=${idm_master.id})}" class="btn btn-primary">Update</a>
+                <td> <a th:href="@{/idmv1/showFormForUpdate/{id}(id=${idm_master.id})}" class="btn btn-info">Update</a>
 
                 </td>
             </tr>
             </tbody>
         </table>
 
-        <a th:href = "@{/idmv1/showNewIDMForm}" class="btn btn-primary btn-sm mb-3"> Register New IDM </a>
+        <a th:href = "@{/idmv1/showNewIDMForm}" class="btn btn-success btn-sm mb-3"> Register New IDM </a>
 
         <div th:if = "${totalPages > 1}">
             <div class = "row col-sm-10">

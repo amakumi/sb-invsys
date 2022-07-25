@@ -10,24 +10,51 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <style>
+        form  { display: table;      }
+        p     { display: table-row;  }
+        label { display: table-cell; }
+        input { display: table-cell; }
+        label {
+            flex-direction: row;
+            justify-content: flex-end;
+            text-align: right;
+            width: 400px;
+            line-height: 26px;
+            margin-bottom: 10px;
+        }
+
+        input {
+            height: 25px;
+            flex: 0 0 200px;
+            margin-left: 10px;
+        }
+    </style>
 </head>
 
 <body>
-<div layout:fragment="content" class="container my-2">
-    <h2>Update IDM Master - <b th:field="*{id}"></b></h2>
-    <form action="#" class="masterUpdateForm" method="POST" th:action="@{/idmv1/saveIDM2}" th:object="${idm_master}">
+<div layout:fragment="content" class="container my-5">
+    <h2>Update IDM Master  <b th:field="*{id}"></b></h2>
+    <hr>
+    <form action="#" class="masterUpdateForm" method="POST" th:action="@{/idmv1/saveIDM2}" th:object="${idm_master}" >
         <table>
             <tr>
-                <td><label for="id">Application ID</label></td>
+                <td><label for="id">Application ID:</label>
+                </td>
                 <td>
-                    <input th:field="*{id}" type="text" name="id" id="id" placeholder="ex. GITLAB" readonly/>
+                    <label>
+                        <input th:field="*{id}" type="text" name="id" id="id" placeholder="ex. GITLAB" readonly/>
+                    </label>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="type">Type
-                        <select name="type" required>
+                    <label for="type">Type:</label>
+                </td>
+                <td>
+                    <label>
+                        <select name="type" required style="width:auto">
                             <option disabled selected>Choose backend service type</option>
                             <option id="type" value="WEB_SERVICE">WEB_SERVICE</option>
                             <option value="API_INTERNAL">API_INTERNAL</option>
@@ -40,7 +67,10 @@
             <tr>
                 <td>
                     <label for="protocol" >
-                        Set Protocol
+                        Set Protocol:</label>
+                </td>
+                <td>
+                    <label>
                         <input type = "radio" name = "protocol" value="HTTPS" id="protocol" required> HTTPS
                         <input type = "radio" name = "protocol" value="HTTP" required> HTTP
                     </label>
@@ -48,37 +78,55 @@
             </tr>
 
             <tr>
-                <td><label for="hostname">Hostname</label></td>
+                <td><label for="hostname">Hostname:</label>
+                </td>
                 <td>
-                    <input th:field="*{hostname}" type="text" name="hostname" id="hostname" placeholder="ex: gitlab.backoffice.pcf.dti.co.id" required/>
+                    <label>
+                        <input th:field="*{hostname}" type="text" name="hostname" id="hostname" placeholder="ex: gitlab.backoffice.pcf.dti.co.id" required/>
+                    </label>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="port">Port</label>
-                    <input th:field="*{port}" type="number" name="port" id="port" placeholder="ex. 443" required/>
+                    <label for="port">Port:</label>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{port}" type="number" name="port" id="port" placeholder="ex. 443" required/>
+                    </label>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="timeout">Connection Timeout (in millisecond)</label>
-                    <input th:field="*{timeout}" type="number" name="timeout" id="timeout" placeholder="30.000"/>
+                    <label for="timeout">Connection Timeout (in millisecond):</label>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{timeout}" type="number" name="timeout" id="timeout" placeholder="30.000"/>
+                    </label>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="read_timeout">Read Timeout (in millisecond)</label>
-                    <input th:field="*{r_timeout}"  type="number" name="read_timeout" id="read_timeout" placeholder="30.000"/>
+                    <label for="read_timeout">Read Timeout (in millisecond):</label>
+                </td>
+                <td>
+                    <label>
+                        <input th:field="*{r_timeout}"  type="number" name="read_timeout" id="read_timeout" placeholder="30.000"/>
+                    </label>
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <label for="site">Site
-                        <select name="site" required>
+                    <label for="site">Site:</label>
+                </td>
+                <td>
+                    <label>
+                        <select name="site" required style="width:auto">
                             <option disabled selected>Choose status</option>
                             <option id="site" value="Development">Development</option>
                             <option value="UAT">UAT</option>
@@ -88,30 +136,38 @@
                 </td>
             </tr>
             <tr>
-                <td class="container my-2">
-                    <label class="container my-2" for="insDate">
-                        <input class="container my-2" th:field="*{insDate}" name="insDate" id="insDate" th:text="${idm_master.ORIGINAL_INSERT_DATE}" readonly>
-                    </label>
+            <tr>
+                <td >
+                    <label for="insDate">Insert date:</label>
                 </td>
-
-                <td class="container my-2">
-                    <label class="container my-2" for="updDate">
-                        <input class="container my-2" th:field="*{updDate}" name="updDate" id="updDate" th:text="${idm_master.UPDATE_DATE}" readonly>
-                    </label>
-                </td>
+            <td>
+                <label>
+                    <input th:field="*{insDate}" name="insDate" id="insDate" th:text="${idm_master.ORIGINAL_INSERT_DATE}" readonly>
+                </label>
+            </td>
             </tr>
             <tr>
+                <td >
+                    <label for="updDate">Modified date:</label>
+                </td>
                 <td>
-                    <button type="submit" class="btn btn-info col-2"> Update IDM Master</button>
+                    <label>
+                        <input th:field="*{updDate}" name="updDate" id="updDate" th:text="${idm_master.UPDATE_DATE}" readonly>
+                    </label>
                 </td>
             </tr>
+
             <!--<button type="submit">Next</button>-->
         </table>
-    </form>
-</div>
-<a th:href="@{/idmv1/delete/{id}(id=${idm_master.id})}" class="btn btn-danger">Delete</a>
 
-<a th:href = "@{/idmv1}"> Cancel</a>
+        <button type="submit" class="btn btn-info col-2" style="position: absolute; right: 15%;"> Update IDM Master</button>
+    </form>
+    <hr>
+        <a th:href="@{/idmv1/delete/{id}(id=${idm_master.id})}" class="btn btn-danger">Delete</a>
+    <hr>
+        <a th:href = "@{/idmv1}"> Cancel</a>
+</div>
+
 <script>
 
     /////// METHOD 1
